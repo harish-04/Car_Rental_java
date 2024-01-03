@@ -1,0 +1,38 @@
+-- Drop foreign key constraint
+ALTER TABLE `car_rental`.`payment` DROP FOREIGN KEY `payment_ibfk_1`;
+
+-- Perform ALTER TABLE statement
+ALTER TABLE `car_rental`.`lease` CHANGE COLUMN `leaseID` `leaseID` INT NOT NULL AUTO_INCREMENT;
+
+-- Recreate foreign key constraint
+ALTER TABLE `car_rental`.`payment` ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`leaseID`) REFERENCES `car_rental`.`lease` (`leaseID`);
+
+-- Modify the foreign key constraint
+ALTER TABLE `car_rental`.`payment` DROP FOREIGN KEY `payment_ibfk_1`;
+ALTER TABLE `car_rental`.`payment` ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`leaseID`) REFERENCES `car_rental`.`lease` (`leaseID`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Drop foreign key constraint
+ALTER TABLE `car_rental`.`lease` DROP FOREIGN KEY `lease_ibfk_2`;
+
+-- Perform ALTER TABLE statement
+ALTER TABLE `car_rental`.`customer` CHANGE COLUMN `customerID` `customerID` INT NOT NULL AUTO_INCREMENT;
+
+-- Recreate foreign key constraint
+ALTER TABLE `car_rental`.`lease` ADD CONSTRAINT `lease_ibfk_2` FOREIGN KEY (`customerID`) REFERENCES `car_rental`.`customer` (`customerID`);
+
+-- Modify the foreign key constraint
+ALTER TABLE `car_rental`.`lease` DROP FOREIGN KEY `lease_ibfk_2`;
+ALTER TABLE `car_rental`.`lease` ADD CONSTRAINT `lease_ibfk_2` FOREIGN KEY (`customerID`) REFERENCES `car_rental`.`customer` (`customerID`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Drop foreign key constraint
+ALTER TABLE `car_rental`.`lease` DROP FOREIGN KEY `lease_ibfk_1`;
+
+-- Perform ALTER TABLE statement
+ALTER TABLE `car_rental`.`vehicle` CHANGE COLUMN `vehicleID` `vehicleID` INT NOT NULL AUTO_INCREMENT;
+
+-- Recreate foreign key constraint
+ALTER TABLE `car_rental`.`lease` ADD CONSTRAINT `lease_ibfk_1` FOREIGN KEY (`vehicleID`) REFERENCES `car_rental`.`vehicle` (`vehicleID`);
+
+-- Modify the foreign key constraint
+ALTER TABLE `car_rental`.`lease` DROP FOREIGN KEY `lease_ibfk_1`;
+ALTER TABLE `car_rental`.`lease` ADD CONSTRAINT `lease_ibfk_1` FOREIGN KEY (`vehicleID`) REFERENCES `car_rental`.`vehicle` (`vehicleID`) ON UPDATE CASCADE ON DELETE CASCADE;
